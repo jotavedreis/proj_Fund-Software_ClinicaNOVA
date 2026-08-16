@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel da Recepção</title>
+    <link rel="icon" type="image/svg+xml" href="../public/images/logo/Logo-Isolada_Clinica_Nova.png">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/painel-recepcao.css">
+</head>
+<body>
+    <header>
+        <a href="../index.html">Sair</a>
+        <h1>Painel da Recepção</h1>
+        <div id="clock" class="clock">00:00:00</div>
+    </header>
+
+    <div class="container">
+        <div class="manage-doctors">
+            <h3>Gerenciar Dentistas</h3>
+            <div id="doctors-list"></div>
+        </div>
+
+        <div class="form-section">
+            <h2>Registrar Paciente</h2>
+            <form id="patient-form">
+                <div class="input-group">
+                    <label for="patient-name">Nome do Paciente</label>
+                    <input type="text" id="patient-name" name="patientName" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="doctor">Doutor</label>
+                    <select id="doctor" name="doctor" required>
+                        <option value="">Escolha o doutor</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="service">Serviço</label>
+                    <select id="service" name="service" required>
+                        <option value="">Escolha o serviço</option>
+                        <option value="Avaliação">Avaliação</option>
+                        <option value="Manutenção">Manutenção</option>
+                        <option value="Prótese">Prótese</option>
+                        <option value="Outro">Outro (especificar)</option>
+                    </select>
+                </div>
+
+                <div class="input-group" id="other-service-group" style="display: none;">
+                    <label for="other-service-detail">Especificar Serviço</label>
+                    <textarea id="other-service-detail" name="otherServiceDetail" placeholder="Descreva o serviço"></textarea>
+                </div>
+
+                <div class="input-group checkbox-group">
+                    <input type="checkbox" id="urgente" name="urgente">
+                    <label for="urgente">Paciente Urgente</label>
+                </div>
+
+                <button type="submit">Registrar Paciente</button>
+            </form>
+        </div>
+
+        <div class="list-section">
+            <h2>Fila de Pacientes</h2>
+            <div id="patient-list">
+                <p class="empty-message">Nenhum paciente registrado</p>
+            </div>
+        </div>
+
+        <div class="history-section">
+            <h2>Histórico de Chamadas
+                <button id="reset-history-btn" type="button">Limpar Histórico</button>
+            </h2>
+            <div class="input-group" style="margin-bottom: 20px;">
+                <label for="filter-doctor">Filtrar por Dentista</label>
+                <select id="filter-doctor" name="filterDoctor">
+                    <option value="">Todos os Dentistas</option>
+                </select>
+            </div>
+            <div id="history-list">
+                <p class="empty-message">Nenhum paciente no histórico</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <img src="../public/images/logo/Logo-Isolada_Clinica_Nova.png" alt="logo-NOVA">
+    </footer>
+
+    <!-- Modal de confirmação/aviso reutilizável -->
+    <div id="confirm-modal" class="modal-overlay">
+        <div class="modal-content">
+            <p id="confirm-message"></p>
+            <div class="modal-actions">
+                <button id="confirm-yes" type="button">Confirmar</button>
+                <button id="confirm-no" type="button">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de edição de paciente -->
+    <div id="edit-modal" class="modal-overlay">
+        <div class="modal-content" style="max-width: 500px;">
+            <h3 style="margin-top: 0;">Editar Paciente</h3>
+            <form id="edit-form">
+                <div class="input-group">
+                    <label for="edit-patient-name">Nome do Paciente</label>
+                    <input type="text" id="edit-patient-name" required>
+                </div>
+                <div class="input-group">
+                    <label for="edit-doctor">Doutor</label>
+                    <select id="edit-doctor" required>
+                        <option value="">Escolha o doutor</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="edit-service">Serviço</label>
+                    <select id="edit-service" required>
+                        <option value="">Escolha o serviço</option>
+                        <option value="Avaliação">Avaliação</option>
+                        <option value="Manutenção">Manutenção</option>
+                        <option value="Prótese">Prótese</option>
+                        <option value="Outro">Outro (especificar)</option>
+                    </select>
+                </div>
+                <div class="input-group" id="edit-other-service-group" style="display: none;">
+                    <label for="edit-other-service-detail">Especificar Serviço</label>
+                    <textarea id="edit-other-service-detail" placeholder="Descreva o serviço"></textarea>
+                </div>
+                <div class="input-group checkbox-group">
+                    <input type="checkbox" id="edit-urgente">
+                    <label for="edit-urgente">Paciente Urgente</label>
+                </div>
+                <div class="modal-actions">
+                    <button type="submit">Salvar</button>
+                    <button type="button" id="edit-cancel">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../js/clock.js"></script>
+    <script type="module" src="../js/recepcao-new.js"></script>
+    <script src="../js/gradient-bg.js"></script>
+</body>
+</html>

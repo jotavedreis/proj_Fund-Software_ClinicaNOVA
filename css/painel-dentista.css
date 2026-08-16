@@ -1,0 +1,530 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        padding: 10px 40px;
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr) auto;
+        column-gap: 16px;
+        align-items: center;
+        height: auto;
+        z-index: 10;
+        background: linear-gradient(180deg, rgb(0, 0, 0) 0%, rgba(36, 91, 99, 0) 100%);
+
+        a {
+            position: static;
+            background: none;
+            border: 2px solid var(--color-secondary);
+            color: white;
+            padding: 10px 25px;
+            font-size: 0.95em;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+            justify-self: start;
+        }
+
+        a:hover {
+            background-color: rgba(36, 91, 99, 0.1);
+            border-color: var(--color-accent);
+            box-shadow: 0 0 15px rgba(36, 91, 99, 0.45);
+        }
+
+        a:active {
+            transform: scale(0.97);
+        }
+    }
+
+        header h1 {
+            color: white;
+            margin: 0;
+            font-size: 1.8em;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-align: center;
+            line-height: 1.4;
+            grid-column: 2;
+            justify-self: center;
+        }
+
+        header .clock {
+            color: var(--color-secondary);
+            font-size: 1.5em;
+            font-weight: 700;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 2px;
+            padding: 12px 20px;
+            background: rgba(0, 139, 139, 0.1);
+            border: 2px solid #2cadbb;
+            border-radius: 8px;
+            min-width: 180px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        header p {
+            color: #2cadbb;
+            margin: 0;
+            font-size: 1.05em;
+            font-weight: 500;
+            display: none;
+        }
+
+    article {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 50px;
+        width: 100%;
+        max-width: 900px;
+        margin: 130px auto 15vh auto;
+        padding: 0 20px 150px 20px;
+
+        .panel-section {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(245, 245, 245, 0.95));
+            border: 3px solid #6FAF9A;
+            border-radius: 15px;
+            padding: 35px;
+            box-shadow: 0 8px 25px rgba(0, 111, 139, 0.12);
+            transition: all 0.3s ease;
+        }
+
+        .panel-section:hover {
+            box-shadow: 0 12px 35px rgba(139, 0, 0, 0.18);
+        }
+
+        h2 {
+            align-items: center;
+            gap: 12px;
+        }
+
+        h2::before {
+            content: '';
+            display: inline-block;
+            width: 5px;
+            height: 30px;
+            background: linear-gradient(to bottom, #6FAF9A, #E9DCC9);
+            border-radius: 3px;
+        }
+
+        #clear-history-btn {
+            background-color: #6FAF9A;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 11px 25px;
+            font-size: 0.95em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 12px rgba(0, 111, 139, 0.25);
+            white-space: nowrap;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 20px;
+            align-self: flex-start;
+        }
+
+        #clear-history-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background-color: rgba(212, 175, 55, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.5s ease, height 0.5s ease;
+            z-index: -1;
+        }
+
+        #clear-history-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        #clear-history-btn:hover {
+            background-color: #6FAF9A;
+            box-shadow: 0 6px 16px rgba(0, 111, 139, 0.35);
+            transform: translateY(-2px);
+            border-bottom: 2px solid #E9DCC9;
+        }
+
+        #clear-history-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(0, 51, 139, 0.2);
+        }
+
+        #patients-waiting,
+        #patients-history {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            min-height: 80px;
+
+            .empty-message {
+                color: #999;
+                font-size: 1.05em;
+                margin: 0;
+                text-align: center;
+                padding: 20px;
+            }
+
+            p {
+                color: #000000;
+                font-size: 1.05em;
+                margin: 0;
+                text-align: center;
+                padding: 20px;
+            }
+        }
+
+        .patient-item {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 12px 18px;
+            background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
+            border: 2px solid #e7e7e7;
+            border-radius: 12px;
+            padding: 18px 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            font-weight: 600;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+
+        .patient-item:hover {
+            border-color: var(--color-primary);
+            box-shadow: 0 6px 18px rgba(0, 86, 139, 0.18);
+            transform: translateX(4px);
+        }
+
+        .patient-info {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .patient-name {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: #2f2f2f;
+            margin: 0;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .urgent-badge {
+            background: #b30000;
+            color: white;
+            border-radius: 999px;
+            padding: 3px 10px;
+            font-size: 0.78em;
+            letter-spacing: 0.3px;
+            box-shadow: 0 4px 12px rgba(179, 0, 0, 0.35);
+            font-weight: 700;
+        }
+
+        .patient-service {
+            font-size: 0.98em;
+            color: #555;
+            margin: 0;
+        }
+
+        .patient-consultorio {
+            font-size: 0.95em;
+            color: var(--color-primary);
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .patient-dentista {
+            font-size: 0.9em;
+            color: #888;
+            margin: 0;
+        }
+
+        .patient-actions {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .patient-button {
+            background-color: var(--color-secondary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 30px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 12px rgba(0, 109, 139, 0.25);
+            white-space: nowrap;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .patient-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background-color: rgba(212, 175, 55, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.5s ease, height 0.5s ease;
+            z-index: -1;
+        }
+
+        .patient-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .patient-button:hover {
+            background-color: var(--color-primary);
+            box-shadow: 0 6px 16px rgba(0, 109, 139, 0.35);
+            transform: translateY(-2px);
+            border-bottom: 2px solid var(--color-sand);
+        }
+
+        .patient-button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(139, 0, 0, 0.2);
+        }
+}
+
+/* Animação especial para o histórico */
+#patients-history .patient-item:hover {
+    border-color: #D4AF37 !important;
+    box-shadow: 0 8px 24px rgba(212, 175, 55, 0.25) !important;
+    transform: translateY(-3px) scale(1.01) !important;
+    background: linear-gradient(180deg, #fffef8 0%, #faf9f0 100%) !important;
+}
+
+/* Modal Premium */
+#call-modal {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: rgba(0, 0, 0, 0.6) !important;
+    z-index: 1000 !important;
+    justify-content: center !important;
+    align-items: center !important;
+    display: none;
+}
+
+#call-modal > div {
+    background: linear-gradient(to bottom, #ffffff, #f5f5f5) !important;
+    padding: 40px 35px !important;
+    border-radius: 15px !important;
+    text-align: center !important;
+    min-width: 420px !important;
+    box-shadow: 0 10px 40px rgba(0, 109, 139, 0.3) !important;
+    border: 3px solid var(--color-primary) !important;
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#modal-patient-name {
+    font-size: 1.8em !important;
+    margin-bottom: 15px !important;
+    color: var(--color-primary) !important;
+    font-weight: 600 !important;
+}
+
+#modal-patient-info {
+    font-size: 1.1em !important;
+    margin-bottom: 25px !important;
+    color: #5a5a5a !important;
+}
+
+#call-modal p:not(#modal-patient-name):not(#modal-patient-info) {
+    font-size: 1.15em !important;
+    color: #333 !important;
+    margin-bottom: 30px !important;
+    font-weight: 500 !important;
+}
+
+#call-modal > div > div {
+    display: flex !important;
+    gap: 15px !important;
+    justify-content: center !important;
+}
+
+#modal-yes-btn,
+#modal-no-btn,
+#modal-recall-btn,
+#modal-close-btn {
+    padding: 13px 35px !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 8px !important;
+    cursor: pointer !important;
+    font-size: 1em !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+    white-space: nowrap !important;
+}
+
+#modal-yes-btn {
+    background: #4CAF50 !important;
+}
+
+#modal-yes-btn:hover {
+    background: #45a049 !important;
+    box-shadow: 0 6px 16px rgba(76, 175, 80, 0.4) !important;
+    transform: translateY(-2px) !important;
+}
+
+#modal-yes-btn:active {
+    transform: translateY(0) !important;
+}
+
+#modal-no-btn {
+    background: #8B0000 !important;
+}
+
+#modal-no-btn:hover {
+    background: #A00000 !important;
+    box-shadow: 0 6px 16px rgba(139, 0, 0, 0.35) !important;
+    transform: translateY(-2px) !important;
+    border-bottom: 2px solid #D4AF37 !important;
+}
+
+#modal-no-btn:active {
+    transform: translateY(0) !important;
+}
+
+#modal-recall-btn:hover {
+    background: #C49D2D !important;
+    box-shadow: 0 6px 16px rgba(212, 175, 55, 0.4) !important;
+    transform: translateY(-2px) !important;
+}
+
+#modal-recall-btn:active {
+    transform: translateY(0) !important;
+}
+
+#modal-close-btn:hover {
+    background: #555 !important;
+    box-shadow: 0 6px 16px rgba(100, 100, 100, 0.4) !important;
+    transform: translateY(-2px) !important;
+}
+
+#modal-close-btn:active {
+    transform: translateY(0) !important;
+}
+
+/* Esconder relógio em mobile */
+@media (max-width: 768px) {
+    .clock {
+        display: none !important;
+    }
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(180deg, rgba(139, 0, 0, 0) 0%, rgba(255, 255, 255, 0.049) 100%);
+    z-index: 10;
+
+    img {
+        width: 70px;
+        height: 70px;
+        object-fit: contain;
+    }
+}
+
+/* Responsivo para tablets */
+@media (max-width: 768px) {
+    body header {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 10px 20px;
+    }
+
+    body header h1 {
+        font-size: 1.3em;
+        grid-column: auto;
+    }
+
+    body header .clock {
+        font-size: 1.1em;
+        min-width: auto;
+        margin-left: 0;
+        width: 100%;
+    }
+
+    body header a {
+        padding: 8px 16px;
+        font-size: 0.85em;
+        min-height: 44px;
+    }
+
+    body article {
+        margin-top: 100px;
+        padding: 0 12px 100px 12px;
+    }
+}
+
+/* Responsivo para celulares */
+@media (max-width: 480px) {
+    body header h1 {
+        font-size: 1.1em;
+    }
+
+    body header a {
+        padding: 8px 12px;
+        font-size: 0.8em;
+    }
+
+    body article {
+        padding: 0 10px;
+    }
+}
+}

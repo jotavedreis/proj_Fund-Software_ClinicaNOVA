@@ -1,0 +1,367 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        padding: 40px 10px;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        height: 20vh;
+        z-index: 10;
+
+        img {
+            width: 200px;
+            height: 200px;
+            object-fit: contain;
+        }
+    }
+
+    article {
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        margin-top: 22vh;
+        margin-bottom: 18vh;
+
+        background: linear-gradient(to bottom, var(--color-surface), var(--color-surface-soft));
+
+        border-radius: 20px;
+        border: 3px solid var(--color-secondary);
+
+        padding: 60px 50px;
+        max-width: 450px;
+        width: 90%;
+        height: auto;
+
+        h2 {
+            color: var(--color-secondary);
+            margin: 0 0 30px 0;
+            font-size: 2em;
+            letter-spacing: 1px;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            gap: 25px;
+        }
+
+        .login-button {
+            background-color: var(--color-secondary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 14px 45px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(36, 91, 99, 0.25);
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .login-button:hover {
+            background-color: var(--color-primary);
+            box-shadow: 0 6px 16px rgba(111, 175, 154, 0.35);
+            border: 2px solid var(--color-sand);
+        }
+
+        div.input-group{
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            width: 100%;
+            gap: 15px;
+
+            label{
+                font-size: 2em;
+                margin: 0;
+                font-weight: 600;
+                color: var(--color-text-soft);
+                letter-spacing: 0.5px;
+                padding-bottom: 6%;
+                text-transform: uppercase;
+            }
+
+            .password-wrapper {
+                position: relative;
+                display: flex;
+                align-items: center;
+                width: 100%;
+                gap: 0;
+
+                input[type="password"],
+                input[type="text"] {
+                    width: 100%;
+                    padding: 15px 50px 15px 18px;
+                    font-size: 1em;
+                    border: 2px solid var(--color-border);
+                    border-radius: 8px;
+                    font-family: inherit;
+                    transition: all 0.3s ease;
+                }
+
+                input[type="password"]:focus,
+                input[type="text"]:focus {
+                    outline: none;
+                    border-color: var(--color-secondary);
+                    box-shadow: 0 0 8px rgba(36, 91, 99, 0.15);
+                }
+
+                .toggle-password {
+                    position: absolute;
+                    right: 12px;
+                    background: none;
+                    border: none;
+                    padding: 8px;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    transition: all 0.3s ease;
+                    width: 60px;
+                    height: auto;
+                }
+
+                .toggle-password img {
+                    width: 32px;
+                    height: 32px;
+                }
+
+                .toggle-password:hover img {
+                    filter: brightness(0.7);
+                }
+
+                .toggle-password:active {
+                    transform: scale(0.95);
+                }
+            }
+        }
+    }
+
+    footer {
+        color: white;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 20px 10px;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        height: 15vh;
+        z-index: 10;
+
+        h3 {
+            margin: 0;
+            font-weight: 500;
+        }
+    }
+}
+
+/* Mobile: Tablets */
+@media (max-width: 768px) {
+    body header {
+        height: 15vh;
+        padding: 20px 10px;
+    }
+
+    body header img {
+        width: 140px;
+        height: 140px;
+    }
+
+    body article {
+        margin-top: 18vh;
+        margin-bottom: 16vh;
+        padding: 40px 30px;
+    }
+
+    body footer {
+        height: 12vh;
+    }
+}
+
+/* Mobile: Phones */
+@media (max-width: 480px) {
+    body header {
+        height: auto;
+        padding: 15px 10px;
+    }
+
+    body header img {
+        width: 100px;
+        height: 100px;
+    }
+
+    body article {
+        margin-top: 130px;
+        margin-bottom: 110px;
+        padding: 30px 20px;
+        width: 95%;
+    }
+
+    body article .login-button {
+        padding: 12px 35px;
+        font-size: 1em;
+        min-height: 44px;
+    }
+
+    body article .input-group label {
+        font-size: 1.2em;
+    }
+
+    body article .password-wrapper input {
+        padding: 12px 45px 12px 15px;
+        font-size: 1em;
+    }
+
+    body article .password-wrapper .toggle-password {
+        width: 50px;
+    }
+
+    body article .password-wrapper .toggle-password img {
+        width: 28px;
+        height: 28px;
+    }
+
+    body footer {
+        height: auto;
+        padding: 15px 10px;
+    }
+
+    body footer h3 {
+        font-size: 0.9em;
+    }
+}
+
+@media (max-width: 360px) {
+    body header img {
+        width: 80px;
+        height: 80px;
+    }
+
+    body article {
+        padding: 25px 15px;
+    }
+
+    body article .input-group label {
+        font-size: 1em;
+    }
+}
+
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--overlay-dark-55);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal-content {
+    background: linear-gradient(to bottom, var(--color-surface), var(--color-surface-soft));
+    border-radius: 15px;
+    border: 3px solid var(--color-secondary);
+    box-shadow: 0 10px 40px rgba(36, 91, 99, 0.3);
+    max-width: 400px;
+    width: 90%;
+    overflow: hidden;
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-header {
+    padding: 30px 30px 15px 30px;
+    border-bottom: 2px solid var(--color-border-soft);
+}
+
+.modal-header h3 {
+    color: var(--color-secondary);
+    margin: 0;
+    font-size: 1.5em;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.modal-body {
+    padding: 25px 30px;
+}
+
+.modal-body p {
+    color: var(--color-text-soft);
+    font-size: 1.05em;
+    margin: 0;
+    line-height: 1.6;
+}
+
+.modal-footer {
+    padding: 15px 30px 30px 30px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+}
+
+.modal-button {
+    background-color: var(--color-secondary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 35px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(36, 91, 99, 0.25);
+}
+
+.modal-button:hover {
+    background-color: var(--color-primary);
+    box-shadow: 0 5px 15px rgba(111, 175, 154, 0.35);
+    border: 2px solid var(--color-sand);
+}
+
+.modal-button:active {
+    transform: scale(0.98);
+}

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel do Dentista</title>
+    <link rel="icon" type="image/svg+xml" href="../public/images/logo/Logo-Isolada_Clinica_Nova.png">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/painel-dentista.css">
+    <style>
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 26px;
+        }
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: 0.3s;
+            border-radius: 26px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: 0.3s;
+            border-radius: 50%;
+        }
+        input:checked + .slider {
+            background-color: #4CAF50;
+        }
+        input:checked + .slider:before {
+            transform: translateX(24px);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="../pages/login-dentista.html">Sair</a>
+        <h1 id="dentist-name-header"></h1>
+        <div style="display: flex; gap: 8px; align-items: center; justify-self: end;">
+            <div id="clock" class="clock">00:00:00</div>
+            <div style="display: flex; gap: 8px; align-items: center;">
+                <label style="font-size: 0.85em; font-weight: 600; color: #fff; white-space: nowrap;">Notificações:</label>
+                <label class="switch">
+                    <input type="checkbox" id="notifications-toggle">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+        <p id="dentist-consultorio"></p>
+    </header>
+    
+    <article id="panel">
+        <div class="panel-section">
+            <h2>Pacientes Aguardando</h2>
+            <div id="patients-waiting">
+                <p>Nenhum paciente aguardando</p>
+            </div>
+        </div>
+
+        <div class="panel-section">
+            <h2>Histórico de Chamadas</h2>
+            <button id="clear-history-btn" type="button">Limpar Histórico</button>
+            <div id="patients-history">
+                <p>Nenhum paciente chamado ainda</p>
+            </div>
+        </div>
+    </article>
+
+    <footer>
+        <img src="../assets/images/logo/logo-atelie-color-tooth.svg" alt="logo-atelie">
+    </footer>
+
+    <!-- Modal flutuante para confirmação de chamada -->
+    <div id="call-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 1000; justify-content: center; align-items: center;">
+        <div style="background: white; padding: 30px; border-radius: 8px; text-align: center; min-width: 400px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+            <h2 id="modal-patient-name" style="font-size: 24px; margin-bottom: 20px;"></h2>
+            <p id="modal-patient-info" style="font-size: 16px; margin-bottom: 30px;"></p>
+            <p style="font-size: 18px; color: #333; margin-bottom: 30px;">O paciente já saiu da sala?</p>
+            <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                <button id="modal-yes-btn" style="padding: 12px 30px; background: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;">Sim, já saiu</button>
+                <button id="modal-recall-btn" style="padding: 12px 30px; background: #D4AF37; color: #000; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; font-weight: 600;">Chamar Novamente</button>
+                <button id="modal-close-btn" style="padding: 12px 30px; background: #666; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;">Fechar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de confirmação para limpar histórico -->
+    <div id="delete-history-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 1000; justify-content: center; align-items: center;">
+        <div id="delete-modal-content" style="background: white; padding: 30px; border-radius: 8px; text-align: center; min-width: 400px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+            <h2 id="delete-modal-title" style="font-size: 24px; margin-bottom: 20px; color: #8B0000;">⚠️ Confirmar Exclusão</h2>
+            <p id="delete-modal-message" style="font-size: 18px; color: #333; margin-bottom: 30px;">Deseja ocultar seu histórico de chamadas?</p>
+            <p id="delete-modal-submessage" style="font-size: 14px; color: #666; margin-bottom: 30px;">(O histórico continuará visível na recepção)</p>
+            <div id="delete-modal-buttons" style="display: flex; gap: 10px; justify-content: center;">
+                <button id="confirm-delete-history-btn" style="padding: 12px 30px; background: #8B0000; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;">Sim, ocultar</button>
+                <button id="cancel-delete-history-btn" style="padding: 12px 30px; background: #666; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/clock.js"></script>
+    <script type="module" src="../js/dentist-panel.js"></script>
+    <script src="../js/gradient-bg.js"></script>
+</body>
+</html>

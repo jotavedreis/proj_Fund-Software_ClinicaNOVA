@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Dentista</title>
+    <link rel="icon" type="image/svg+xml" href="../public/images/logo/Logo-Isolada_Clinica_Nova.png">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/login-dentista.css">
+</head>
+<body>
+    <header>
+        <a href="../index.html">
+            Sair
+        </a>
+        <img src="../public/images/logo/Logo-Isolada_Clinica_Nova.png" alt="logo-clinica-nova">
+    </header>
+    <article>
+        <form class="dentist-login-form">
+            <h2>
+                Login Dentista
+            </h2>
+
+            <div class="input-group">
+                <label for="dentist-select">
+                    Dentista
+                </label>
+                <select id="dentist-select" name="dentistSelect" required>
+                    <option value="">Escolha seu nome</option>
+                    <option value="Dra. Beatriz">Dra. Beatriz</option>
+                    <option value="Dra. Suziane">Dra. Suziane</option>
+                    <option value="Dra. Amanda">Dra. Amanda</option>
+                    <option value="Outro">Outro (informar nome)</option>
+                </select>
+            </div>
+
+            <div class="input-group" id="other-dentist-group" style="display: none;">
+                <label for="dentist-name">
+                    Seu nome
+                </label>
+                <input type="text" id="dentist-name" name="dentistName">
+            </div>
+
+            <div class="input-group">
+                <label for="consultorio">
+                    Consultório
+                </label>
+                <select id="consultorio" name="consultorio" required>
+                    <option value="">
+                        Escolha o consultório
+                    </option>
+                    <option value="1">
+                        Consultório 1
+                    </option>
+                    <option value="2">
+                        Consultório 2
+                    </option>
+                    <option value="3">
+                        Consultório 3
+                    </option>
+                    <option value="4">
+                        Consultório 4
+                    </option>
+                </select>
+            </div>
+
+            <button type="submit">
+                Entrar
+            </button>
+        </form>
+    </article>
+
+    <!-- Modal para escolher pronome (Dr./Dra.) -->
+    <div id="pronoun-modal" class="modal-overlay">
+        <div class="modal-content">
+            <p>Como devemos exibir seu nome?</p>
+            <div class="modal-actions">
+                <button id="btn-dra" type="button">Dra.</button>
+                <button id="btn-dr" type="button">Dr.</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="../js/dentista-login.js"></script>
+    <script src="../js/gradient-bg.js"></script>
+</body>
+</html>

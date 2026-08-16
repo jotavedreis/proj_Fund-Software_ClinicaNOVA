@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Chamada</title>
+    <link rel="icon" type="image/svg+xml" href="../public/images/logo/Logo-Isolada_Clinica_Nova.png">
+    <!-- Performance hints -->
+    <link rel="preconnect" href="https://www.youtube.com">
+    <link rel="preconnect" href="https://i.ytimg.com">
+    <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/painel-chamada.css">
+</head>
+<body>
+    <header class="topbar">
+        <a class="exit-btn" href="../index.html">Sair</a>
+    </header>
+
+    <main class="call-stage">
+        <section class="call-card">
+            <div class="call-left">
+                <div class="video-frame">
+                    <!-- Substitua PLAYLIST_ID pela playlist do YouTube desejada -->
+                    <iframe id="call-video" src="https://www.youtube.com/embed/videoseries?si=UrCitfwNqd2kOfHB&amp;list=PLkshgX1LcJhHoQrpd-TC2c2z7-goFDNcM&shuffle=1&autoplay=1&mute=0&controls=1&loop=1&rel=0&modestbranding=1&fs=0" title="Playlist institucional" allow="autoplay; encrypted-media" allowfullscreen loading="lazy"></iframe>
+                </div>
+            </div>
+
+            <div class="call-right">
+                <div class="call-clock" id="call-clock">00:00:00</div>
+
+                <div class="call-current" id="call-display">
+                    <p class="call-patient" id="call-patient-name">Aguardando chamada...</p>
+                    <p class="call-consultorio" id="call-consultorio"></p>
+                    <p class="call-doctor" id="call-doctor"></p>
+                </div>
+
+                <div class="call-recent">
+                    <div class="recent-header">
+                        <span>Chamadas Recentes</span>
+                    </div>
+                    <div class="recent-list" id="recent-calls-list">
+                        <p class="empty-message">Nenhuma chamada recente</p>
+                    </div>
+                </div>
+
+                <div class="call-logo">
+                    <div class="brand-wrapper">
+                        <span class="call-handle">@clinicanova</span>
+                        <img src="../public/images/logo/Logo-Isolada_Clinica_Nova.png" alt="Logo Clínica Nova">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modal de Chamada com Auto-Close -->
+        <div id="call-modal-alert" class="call-modal-alert" style="display: none;">
+            <div class="call-modal-content">
+                <h2>Paciente Chamado</h2>
+                <p id="modal-patient-name" class="modal-patient-name">---</p>
+                <p class="modal-info">Consultório <span id="modal-consultorio-value">---</span></p>
+                <p class="modal-info">Dentista <span id="modal-doctor-value">---</span></p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script type="module" src="../js/painel-chamada-new.js"></script>
+    <!-- Fallback para navegadores sem suporte a ES Modules (ex.: algumas TVs) -->
+    <script nomodule src="../js/painel-chamada-legacy.js"></script>
+    <script src="../js/gradient-bg.js"></script>
+</body>
+</html>
