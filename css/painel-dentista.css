@@ -66,7 +66,7 @@ body {
         }
 
         header .clock {
-            color: var(--color-secondary);
+            color: var(--color-accent);
             font-size: 1.5em;
             font-weight: 700;
             font-family: 'Courier New', monospace;
