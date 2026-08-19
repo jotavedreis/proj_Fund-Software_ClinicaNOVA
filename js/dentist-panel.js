@@ -253,7 +253,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             div.innerHTML = `
                 <div class="patient-info">
-                    <p class="patient-name">${patient.name}${patient.urgente ? '<span class="urgent-badge">URGENTE</span>' : ''}</p>
+                    <p class="patient-name">${patient.name}${patient.urgente ? '<span class="urgent-badge">PRIORITÁRIO</span>' : ''}</p>
                     <p class="patient-service">Serviço: ${serviceName}</p>
                 </div>
                 <div class="patient-actions">
